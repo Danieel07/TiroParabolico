@@ -1,5 +1,4 @@
 package co.edu.unbosque.controller;
-
 import co.edu.unbosque.model.operacionesTiro;
 import co.edu.unbosque.view.View;
 import javafx.application.Application;

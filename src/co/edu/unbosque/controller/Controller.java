@@ -53,6 +53,7 @@ public class Controller {
 
             if (view.getProyectil().getCenterX() <= 0 || view.getProyectil().getCenterX() >= 600 ||
                 view.getProyectil().getCenterY() >= 265 || view.getProyectil().getCenterY() <= 0) {
+            	showCollisionImage();
                 resetProjectilePosition();
             }
         }));
@@ -60,7 +61,20 @@ public class Controller {
         timeline.setCycleCount(127);
         timeline.play();
     }
+    
+    private void showCollisionImage() {
+        view.getCollisionImageView().setVisible(true);
 
+        // Centrar la imagen en la pantalla
+        view.getCollisionImageView().setX((view.getScene().getWidth() - view.getCollisionImageView().getFitWidth()) / 2);
+        view.getCollisionImageView().setY((view.getScene().getHeight() - view.getCollisionImageView().getFitHeight()) / 2);
+
+        // Ocultar la imagen después de 1 segundo
+        Timeline hideImageTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            view.getCollisionImageView().setVisible(false);
+        }));
+        hideImageTimeline.play();
+    }
     private void updateCannonLine() {
         double radianAngle = Math.toRadians(model.getAngulo());
         double length = 50;

@@ -4,6 +4,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -25,6 +27,7 @@ public class View {
     private Label angleLabel;
     private Label powerLabel;
     private Scene scene;
+    private ImageView collisionImageView;
 
     public View(Stage primaryStage) {
         root = new Pane();
@@ -72,6 +75,19 @@ public class View {
         primaryStage.setTitle("Simulación de Tiro Parabólico (Proyecto Nucleo 1)");
         primaryStage.setScene(scene);
         primaryStage.show();
+        
+        Image collisionImage = new Image(getClass().getResourceAsStream("MyIcon.png"));
+        collisionImageView = new ImageView(collisionImage);
+        collisionImageView.setFitWidth(100);
+        collisionImageView.setFitHeight(100); 
+        collisionImageView.setVisible(false); 
+
+        // Centrar la imagen en la pantalla
+        collisionImageView.setX((scene.getWidth() - collisionImageView.getFitWidth()) / 2);
+        collisionImageView.setY((scene.getHeight() - collisionImageView.getFitHeight()) / 2);
+
+        root.getChildren().add(collisionImageView);
+        
     }
 
     public Pane getRoot() {
@@ -116,6 +132,10 @@ public class View {
 
     public Scene getScene() {
         return scene;
+    }
+    
+    public ImageView getCollisionImageView() {
+        return collisionImageView;
     }
 }
 
